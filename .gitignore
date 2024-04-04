@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# But not these files...
+!docs-source
+!docs-source/**
+!.gitignore
+!LICENSE
+!README.md
