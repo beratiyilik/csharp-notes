@@ -350,4 +350,4 @@ This guide introduces the new features in C# 6.0, designed to make coding simple
 
 In this guide, we looked at the new features in C# 6.0. These features include making properties easier to write, adding ways to put expressions in strings, using nameof to avoid magic strings, checking for null in a simpler way, filtering exceptions, writing single-line functions and properties, using await in catch and finally blocks, and new ways to initialize indexes. These changes make C# code cleaner, easier to read, and more efficient. With these improvements, developers can write less code to do more things, which makes programming in C# better and more fun. This guide aimed to show you these new features so you can start using them in your projects.
 
-[Previous: Introduction](./introduction.md) | [Back to main page](../README.md) | [Next: IAM (Identity and Access Management)](./iam-identity-and-access-management.md)
+[Previous: Introduction](./introduction.md) | [Back to main page](../README.md) | [Next: C# 7.0 New Features Guide](./csharp-7.0.md)
