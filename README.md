@@ -24,3 +24,8 @@
    - [Generalized Async Return Types](./docs-source/csharp-7.0.md#generalized-async-return-types)
    - [Expression Bodied Members Expansion](./docs-source/csharp-7.0.md#expression-bodied-members-expansion)
    - [Throw Expressions](./docs-source/csharp-7.0.md#throw-expressions)
+4. [C# 7.1 New Features Guide](./docs-source/csharp-7.1.md)
+   - [Tuple Projection Initializers](./docs-source/csharp-7.1.md#tuple-projection-initializers)
+   - [Pattern Matching with Generics](./docs-source/csharp-7.1.md#pattern-matching-with-generics)
+   - [Default Expression](./docs-source/csharp-7.1.md#default-expression)
+   - [Async Main](./docs-source/csharp-7.1.md#async-main)
