@@ -1,10 +1,10 @@
-# C# 9.0 New Features
+# C# 9.0 New Features Overview
 
 ## Table of Contents
 
-- [C# 9.0 New Features](#c-90-new-features)
+- [C# 9.0 New Features Overview](#c-90-new-features)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
     - [Records](#records)
     - [Init-only properties](#init-only-properties)
@@ -25,23 +25,23 @@
     - [Attributes on local functions](#attributes-on-local-functions)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
-- In C# 9.0, several significant features were introduced, enhancing the language's capabilities and developer productivity. This version emphasizes simplifying common coding scenarios, supporting immutable data models, and enhancing pattern matching for more expressive and concise code. Notably, C# 9.0 brings in records for creating immutable reference types with value-based equality, enabling more predictable code, especially in multithreaded environments. Init-only properties allow for immutable object creation with object initializers, providing a flexible yet secure way to work with data that does not change after its initial creation.
+In C# 9.0, several significant features were introduced, enhancing the language's capabilities and developer productivity. This version emphasizes simplifying common coding scenarios, supporting immutable data models, and enhancing pattern matching for more expressive and concise code. Notably, C# 9.0 brings in records for creating immutable reference types with value-based equality, enabling more predictable code, especially in multithreaded environments. Init-only properties allow for immutable object creation with object initializers, providing a flexible yet secure way to work with data that does not change after its initial creation.
 
-- Top-level statements reduce the boilerplate code required for simple programs, making it easier to get started with C# projects. The introduction of pattern matching enhancements, including relational and logical patterns, offers more powerful and readable conditional logic constructions. Performance improvements for high-performance computing scenarios are achieved through native sized integers and function pointers, facilitating efficient interoperation with unmanaged code and memory operations. The suppression of the `localsinit` flag and the addition of module initializers further contribute to performance optimization and flexibility in initializing modules.
+Top-level statements reduce the boilerplate code required for simple programs, making it easier to get started with C# projects. The introduction of pattern matching enhancements, including relational and logical patterns, offers more powerful and readable conditional logic constructions. Performance improvements for high-performance computing scenarios are achieved through native sized integers and function pointers, facilitating efficient interoperation with unmanaged code and memory operations. The suppression of the `localsinit` flag and the addition of module initializers further contribute to performance optimization and flexibility in initializing modules.
 
-- Furthermore, C# 9.0 extends its language features with target-typed new expressions, static anonymous functions, and covariant return types, among others, providing developers with more tools to write efficient and clean code. The expansion of pattern matching capabilities and the introduction of records represent a significant step towards supporting modern programming patterns, such as immutable data structures, which are essential for concurrent programming models. Overall, C# 9.0 continues to evolve the language, making it more powerful, expressive, and suited to a wide range of programming tasks.
+Furthermore, C# 9.0 extends its language features with target-typed new expressions, static anonymous functions, and covariant return types, among others, providing developers with more tools to write efficient and clean code. The expansion of pattern matching capabilities and the introduction of records represent a significant step towards supporting modern programming patterns, such as immutable data structures, which are essential for concurrent programming models. Overall, C# 9.0 continues to evolve the language, making it more powerful, expressive, and suited to a wide range of programming tasks.
 
 ## New Features
 
 ### Records
 
-- C# 9.0 introduces a new type called "records," designed to make it easier to create immutable reference types. Unlike traditional classes where equality is based on object reference, records offer value-based equality. This means two record instances are considered equal if they have the same values for all their properties, regardless of whether they are the same instance.
+C# 9.0 introduces a new type called "records," designed to make it easier to create immutable reference types. Unlike traditional classes where equality is based on object reference, records offer value-based equality. This means two record instances are considered equal if they have the same values for all their properties, regardless of whether they are the same instance.
 
-- Records are particularly useful for defining data models where you do not expect the data to change once it's been created. This immutability is achieved through the use of "init" properties, which can only be set during object initialization. After a record is created, its properties cannot be changed, promoting safer and more predictable code, especially in multithreaded environments.
+Records are particularly useful for defining data models where you do not expect the data to change once it's been created. This immutability is achieved through the use of "init" properties, which can only be set during object initialization. After a record is created, its properties cannot be changed, promoting safer and more predictable code, especially in multithreaded environments.
 
-- This feature streamlines data modeling, especially for applications like data transfer objects (DTOs), where records can provide a concise, readable syntax for defining data structures, along with built-in behavior for value equality comparisons.
+This feature streamlines data modeling, especially for applications like data transfer objects (DTOs), where records can provide a concise, readable syntax for defining data structures, along with built-in behavior for value equality comparisons.
 
 - **Basic Record Example**
 
@@ -115,11 +115,9 @@ Console.WriteLine(person1 == person2); // Outputs: True
 
 ### Init-only properties
 
-- In C# 9.0, a new feature called "init-only properties" allows properties of an object to be set at the time of creation but remain immutable afterward. This feature provides a more straightforward and flexible way to create immutable objects compared to the traditional approach, which required read-only properties that were only settable through a constructor. With init-only properties, you can easily assign values to properties using object initializers, making the code more concise and readable. This enhancement is part of C# 9.0's broader efforts to improve support for immutable data models and functional programming patterns, ensuring that once an object is fully initialized, its state cannot be modified, which can lead to safer and more predictable code.
+In C# 9.0, a new feature called "init-only properties" allows properties of an object to be set at the time of creation but remain immutable afterward. This feature provides a more straightforward and flexible way to create immutable objects compared to the traditional approach, which required read-only properties that were only settable through a constructor. With init-only properties, you can easily assign values to properties using object initializers, making the code more concise and readable. This enhancement is part of C# 9.0's broader efforts to improve support for immutable data models and functional programming patterns, ensuring that once an object is fully initialized, its state cannot be modified, which can lead to safer and more predictable code.
 
-- **Basic Init-Only Property in a Person Class**
-
-- This example demonstrates a simple use of init-only properties in a `Person` class to create an immutable object once it's constructed.
+- **Basic Init-Only Property in a Person Class**: This example demonstrates a simple use of init-only properties in a `Person` class to create an immutable object once it's constructed.
 
 ```csharp
 public class Person
@@ -144,9 +142,7 @@ var person = new Person("John", "Doe")
 // person.FirstName = "Jack";
 ```
 
-- **Using Init-Only Properties with Object Initializers**
-
-- In this example, the init-only properties are being set using an object initializer, showcasing the flexibility and readability of init-only properties for setting up immutable objects.
+- **Using Init-Only Properties with Object Initializers**: In this example, the init-only properties are being set using an object initializer, showcasing the flexibility and readability of init-only properties for setting up immutable objects.
 
 ```csharp
 public class Address
@@ -165,9 +161,7 @@ var address = new Address
 // address.City = "Los Angeles";
 ```
 
-- **Init-Only Properties with Records**
-
-- This example shows how init-only properties are used in conjunction with records, a new reference type in C# 9, to enforce immutability more naturally.
+- **Init-Only Properties with Records**: This example shows how init-only properties are used in conjunction with records, a new reference type in C# 9, to enforce immutability more naturally.
 
 ```csharp
 public record Product
@@ -186,9 +180,7 @@ var product = new Product
 // product.Price = 1100M;
 ```
 
-- **Using Init-Only Properties to Ensure Valid Data**
-
-- Init-only properties can ensure that once an object is fully initialized, its state remains valid and unchanged.
+- **Using Init-Only Properties to Ensure Valid Data**: Init-only properties can ensure that once an object is fully initialized, its state remains valid and unchanged.
 
 ```csharp
 public class Account
@@ -218,11 +210,9 @@ var account = new Account("123456", 500)
 // account.Balance = 50;
 ```
 
--
-
 ### Top-level statements
 
-- In C# 9.0, top-level statements make writing simple programs and scripts more straightforward. You no longer need to define a `namespace`, a `Program` class, or a `Main` method. Instead, you can directly write your main program's logic at the top level of a file. This feature reduces the boilerplate code required for small programs, making the code easier to read and write, especially for beginners or for those writing small utilities and scripts. It simplifies the entry point of applications by allowing the immediate execution of code.
+In C# 9.0, top-level statements make writing simple programs and scripts more straightforward. You no longer need to define a `namespace`, a `Program` class, or a `Main` method. Instead, you can directly write your main program's logic at the top level of a file. This feature reduces the boilerplate code required for small programs, making the code easier to read and write, especially for beginners or for those writing small utilities and scripts. It simplifies the entry point of applications by allowing the immediate execution of code.
 
 - **Basic Console Application**
 
@@ -313,11 +303,9 @@ Console.WriteLine($"Argument count: {args.Length}");
 
 ### Pattern matching enhancements: relational patterns and logical patterns
 
-- In C# 9.0, pattern matching capabilities were enhanced with the addition of relational patterns and logical patterns. Relational patterns allow the code to express conditions such as checking if a value falls within a certain range directly within a pattern, using operators like <, <=, >, and >=. For example, you could easily check if a numerical value is between two constants. Logical patterns introduce the ability to combine patterns with logical operators such as and, or, and not, enabling more complex condition checks within a single pattern expression. This means you can succinctly express conditions that require the combination or negation of patterns, making the code both clearer and more concise. These enhancements significantly improve the expressiveness and power of pattern matching in C#, allowing for more readable and maintainable code when dealing with complex conditional logic.
+In C# 9.0, pattern matching capabilities were enhanced with the addition of relational patterns and logical patterns. Relational patterns allow the code to express conditions such as checking if a value falls within a certain range directly within a pattern, using operators like <, <=, >, and >=. For example, you could easily check if a numerical value is between two constants. Logical patterns introduce the ability to combine patterns with logical operators such as and, or, and not, enabling more complex condition checks within a single pattern expression. This means you can succinctly express conditions that require the combination or negation of patterns, making the code both clearer and more concise. These enhancements significantly improve the expressiveness and power of pattern matching in C#, allowing for more readable and maintainable code when dealing with complex conditional logic.
 
-- **Relational Patterns Example**
-
-- Relational patterns in C# 9.0 allow for comparing the relationship between an expression's value and a constant. This enhances the readability and conciseness of the code.
+- **Relational Patterns Example**: Relational patterns in C# 9.0 allow for comparing the relationship between an expression's value and a constant. This enhances the readability and conciseness of the code.
 
 - Scenario: Temperature Categorization
 
@@ -339,9 +327,7 @@ Console.WriteLine(CategorizeTemperature(27));  // Output: Warm
 Console.WriteLine(CategorizeTemperature(35));  // Output: Hot
 ```
 
-- **Logical Patterns Example**
-
-- Logical patterns introduce the use of `and`, `or`, and `not` logical operators to combine multiple patterns into more complex conditions.
+- **Logical Patterns Example**: Logical patterns introduce the use of `and`, `or`, and `not` logical operators to combine multiple patterns into more complex conditions.
 
 - Scenario: Special Offer Eligibility
 
@@ -364,11 +350,9 @@ Console.WriteLine(IsEligibleForOffer(youngNonMemberPerson));  // Output: True
 Console.WriteLine(IsEligibleForOffer(seniorNonMemberPerson));  // Output: False
 ```
 
-- These examples demonstrate the expressive and concise nature of relational and logical patterns in C# 9.0.
-
 ### Performance and interop
 
-- C# 9.0 introduced enhancements in "Performance and Interop" aiming at supporting high-performance computing scenarios and better interoperability with unmanaged code. This includes:
+C# 9.0 introduced enhancements in "Performance and Interop" aiming at supporting high-performance computing scenarios and better interoperability with unmanaged code. This includes:
 
 - **Native sized integers (`nint` and `nuint`)**: These new types mirror the native size integers on the target machine, offering a more seamless interaction with unmanaged code without having to use `IntPtr` or `UIntPtr`. This makes it easier to work with pointer arithmetic and system calls requiring platform-specific integer sizes.
 
@@ -454,7 +438,7 @@ class Program
 
 ### Native sized integers
 
-- The new feature of "Native sized integers" in C# 9.0 offers a way to work with integers that are sized based on the native architecture of the CPU running the application. This means their size can be either 32 bits or 64 bits depending on whether the system is 32-bit or 64-bit. This enhancement is part of C# 9.0's broader push for performance and interop capabilities, particularly useful for scenarios requiring close interaction with the underlying hardware or calling native code, enabling more efficient handling of pointer and memory operations without the need for explicit size definitions in code. This addition supports high-performance computing scenarios by offering types nint and nuint, which model the native-size integer types on the target CPU, further enriching C#'s type system for modern applications and system-level programming.
+The new feature of "Native sized integers" in C# 9.0 offers a way to work with integers that are sized based on the native architecture of the CPU running the application. This means their size can be either 32 bits or 64 bits depending on whether the system is 32-bit or 64-bit. This enhancement is part of C# 9.0's broader push for performance and interop capabilities, particularly useful for scenarios requiring close interaction with the underlying hardware or calling native code, enabling more efficient handling of pointer and memory operations without the need for explicit size definitions in code. This addition supports high-performance computing scenarios by offering types nint and nuint, which model the native-size integer types on the target CPU, further enriching C#'s type system for modern applications and system-level programming.
 
 - **Basic Operations with `nint` and `nuint`**
 
@@ -545,11 +529,9 @@ public class NativeInteropExample
 
 ### Function pointers
 
-- In C# 9.0, a new feature called "Function pointers" was introduced. This enhancement allows for delegate-like functionality without the need to allocate memory for a delegate object, making it useful for high-performance computing scenarios. With function pointers, C# programs can now operate closer to the hardware level by directly invoking pointers to functions, similar to what is possible in languages like C and C++. This feature is part of a broader set of improvements aimed at supporting high-performance applications and interoperability with other languages and systems. It's designed for advanced scenarios where performance is critical, and it brings C# closer to low-level programming while maintaining the safety and productivity features the language is known for.
+In C# 9.0, a new feature called "Function pointers" was introduced. This enhancement allows for delegate-like functionality without the need to allocate memory for a delegate object, making it useful for high-performance computing scenarios. With function pointers, C# programs can now operate closer to the hardware level by directly invoking pointers to functions, similar to what is possible in languages like C and C++. This feature is part of a broader set of improvements aimed at supporting high-performance applications and interoperability with other languages and systems. It's designed for advanced scenarios where performance is critical, and it brings C# closer to low-level programming while maintaining the safety and productivity features the language is known for.
 
-- **Using Function Pointers for Interop**
-
-- Function pointers in C# 9.0 offer a way to define and use pointers to functions, similar to function pointers in languages like C++. They are particularly useful for interoperability scenarios, such as calling C libraries from C#.
+- **Using Function Pointers for Interop**: Function pointers in C# 9.0 offer a way to define and use pointers to functions, similar to function pointers in languages like C++. They are particularly useful for interoperability scenarios, such as calling C libraries from C#.
 
 ```csharp
 using System;
@@ -586,9 +568,7 @@ class Program
 }
 ```
 
-- **Performance-Oriented Scenarios**
-
-- Function pointers are also advantageous for high-performance scenarios where avoiding delegate allocation overhead is crucial, such as in tight loops or performance-critical code paths.
+- **Performance-Oriented Scenarios**: Function pointers are also advantageous for high-performance scenarios where avoiding delegate allocation overhead is crucial, such as in tight loops or performance-critical code paths.
 
 ```csharp
 using System;
@@ -627,11 +607,11 @@ class PerformanceCritical
 
 ### Suppress emitting `localsinit` flag
 
-- The "Suppress emitting `localsinit` flag" feature introduced in C# 9.0 allows developers to opt out of the automatic initialization of local variables to their default values by the Common Language Runtime (CLR). By default, the CLR initializes local variables in methods to ensure type safety. This process involves setting memory for stack-allocated variables (including those used with `stackalloc`) to zero. However, in performance-critical code, this automatic zero-initialization can be an unnecessary overhead, especially when variables are immediately set to specific values before use.
+The "Suppress emitting `localsinit` flag" feature introduced in C# 9.0 allows developers to opt out of the automatic initialization of local variables to their default values by the Common Language Runtime (CLR). By default, the CLR initializes local variables in methods to ensure type safety. This process involves setting memory for stack-allocated variables (including those used with `stackalloc`) to zero. However, in performance-critical code, this automatic zero-initialization can be an unnecessary overhead, especially when variables are immediately set to specific values before use.
 
-- To address this, C# 9.0 introduces the `SkipLocalsInitAttribute`, which can be applied to methods, classes, or even entire modules. When this attribute is present, the C# compiler does not emit the `localsinit` flag for the affected method(s), which instructs the JIT compiler to skip the zero-initialization of local variables. This can lead to performance improvements in certain scenarios, particularly where large stack-allocated arrays are used, and each element is assigned a value before any access occurs.
+To address this, C# 9.0 introduces the `SkipLocalsInitAttribute`, which can be applied to methods, classes, or even entire modules. When this attribute is present, the C# compiler does not emit the `localsinit` flag for the affected method(s), which instructs the JIT compiler to skip the zero-initialization of local variables. This can lead to performance improvements in certain scenarios, particularly where large stack-allocated arrays are used, and each element is assigned a value before any access occurs.
 
-- This feature is specifically useful in high-performance computing scenarios where every cycle counts, and developers have full control over the initialization and usage of their variables. It's a compiler feature, not a language feature, meaning it affects how the code is compiled rather than introducing new syntax or constructs into the C# language itself .
+This feature is specifically useful in high-performance computing scenarios where every cycle counts, and developers have full control over the initialization and usage of their variables. It's a compiler feature, not a language feature, meaning it affects how the code is compiled rather than introducing new syntax or constructs into the C# language itself .
 
 - **Suppressing `localsinit` in a Method**
 
@@ -690,11 +670,9 @@ public class HighPerformanceClass
 
 ### Module initializers
 
-- The new feature "Module Initializers" in C# 9.0 is a powerful addition that allows methods to be executed automatically when an assembly loads, without requiring explicit calls. This enhancement supports scenarios where code generators add functionality seamlessly. By designating specific methods as module initializers, developers ensure these methods run to initialize a module right as it becomes part of the application. This capability streamlines setups, especially in libraries or frameworks needing initial setup before use, enhancing automation and reducing boilerplate initialization code
+The new feature "Module Initializers" in C# 9.0 is a powerful addition that allows methods to be executed automatically when an assembly loads, without requiring explicit calls. This enhancement supports scenarios where code generators add functionality seamlessly. By designating specific methods as module initializers, developers ensure these methods run to initialize a module right as it becomes part of the application. This capability streamlines setups, especially in libraries or frameworks needing initial setup before use, enhancing automation and reducing boilerplate initialization code
 
-- **Basic Module Initializer**
-
-- In this example, we'll see how to define a simple module initializer that sets up some application-wide settings or performs necessary initialization steps before any type or method is accessed within the assembly.
+- **Basic Module Initializer**: In this example, we'll see how to define a simple module initializer that sets up some application-wide settings or performs necessary initialization steps before any type or method is accessed within the assembly.
 
 ```csharp
 using System;
@@ -729,9 +707,7 @@ namespace ModuleInitializersDemo
 
 - This example demonstrates a basic use case where the module initializer `Initialize` is automatically invoked when the assembly is loaded, even before the `Main` method execution begins. The `Initialize` method sets the application name and performs other initialization tasks.
 
-- **Database Connection Initialization**
-
-- Module initializers can also be useful for setting up database connections or reading configuration settings required across the application. Here's a simplified example:
+- **Database Connection Initialization**: Module initializers can also be useful for setting up database connections or reading configuration settings required across the application. Here's a simplified example:
 
 ```csharp
 using System;
@@ -759,11 +735,9 @@ namespace ModuleInitializersDemo
 
 ### New features for partial methods
 
-- In C# 9.0, partial methods received a significant upgrade to work more effectively with code generators. Previously, partial methods could not have a return value, out parameters, or access modifiers, limiting their utility. However, with C# 9.0, these restrictions have been lifted, allowing partial methods to be almost indistinguishable from regular methods. They can now have return values, out parameters, and be declared with access modifiers like public. This enhancement means that partial methods can now be used in more scenarios, resembling the separation of header files and implementation seen in languages like C++. However, it's important to note that if a partial method is declared with an access modifier, its implementation must be provided; otherwise, the project won't compile. This feature is particularly useful for code generators and frameworks that rely on partial methods to allow developers to customize generated code.
+In C# 9.0, partial methods received a significant upgrade to work more effectively with code generators. Previously, partial methods could not have a return value, out parameters, or access modifiers, limiting their utility. However, with C# 9.0, these restrictions have been lifted, allowing partial methods to be almost indistinguishable from regular methods. They can now have return values, out parameters, and be declared with access modifiers like public. This enhancement means that partial methods can now be used in more scenarios, resembling the separation of header files and implementation seen in languages like C++. However, it's important to note that if a partial method is declared with an access modifier, its implementation must be provided; otherwise, the project won't compile. This feature is particularly useful for code generators and frameworks that rely on partial methods to allow developers to customize generated code.
 
-- **Using Partial Methods with Return Value and Out Parameters**
-
-- C# 9.0 extends the capabilities of partial methods, allowing them to have return values, out parameters, and access modifiers. This enhancement makes partial methods nearly as versatile as regular methods. Here's an example to illustrate the use of a partial method with a return value and an out parameter:
+- **Using Partial Methods with Return Value and Out Parameters**: C# 9.0 extends the capabilities of partial methods, allowing them to have return values, out parameters, and access modifiers. This enhancement makes partial methods nearly as versatile as regular methods. Here's an example to illustrate the use of a partial method with a return value and an out parameter:
 
 ```csharp
 public partial class Person
@@ -794,9 +768,7 @@ public partial class Person
 
 - In this example, the `TrySpeak` partial method attempts to generate spoken text from a line. If the line is not empty or null, it constructs the spoken text and returns true; otherwise, it returns false.
 
-- **Partial Method with Access Modifiers**
-
-- Prior to C# 9.0, partial methods were implicitly private and did not allow specifying access modifiers. C# 9.0 removes this restriction, enabling developers to explicitly define the accessibility of partial methods. The following example shows how a public partial method can be declared and implemented:
+- **Partial Method with Access Modifiers**: Prior to C# 9.0, partial methods were implicitly private and did not allow specifying access modifiers. C# 9.0 removes this restriction, enabling developers to explicitly define the accessibility of partial methods. The following example shows how a public partial method can be declared and implemented:
 
 ```csharp
 public partial class Calculator
@@ -825,9 +797,9 @@ public partial class Calculator
 
 ### Target-typed new expressions
 
-- In C# 9.0, "Target-typed new expressions" is a new feature that simplifies how objects are instantiated. Previously, when creating an object, you had to specify the type both on the left and right sides of the assignment. This feature allows you to omit the type on the right side if the type is already known from the context. It makes code cleaner, especially when the type name is long or when initializing properties or collections. This enhancement is part of C# 9.0's broader efforts to reduce unnecessary coding "ceremony" and make code more concise and readable.
+In C# 9.0, "Target-typed new expressions" is a new feature that simplifies how objects are instantiated. Previously, when creating an object, you had to specify the type both on the left and right sides of the assignment. This feature allows you to omit the type on the right side if the type is already known from the context. It makes code cleaner, especially when the type name is long or when initializing properties or collections. This enhancement is part of C# 9.0's broader efforts to reduce unnecessary coding "ceremony" and make code more concise and readable.
 
-- ** Instantiating an Object**
+- **Instantiating an Object**
 
 - Before C# 9.0, specifying the type of the object explicitly was required when instantiating objects. This could sometimes lead to redundant code.
 
@@ -899,7 +871,7 @@ _Comments:_ This example focuses on dictionary initializers, showcasing the read
 
 ### Static anonymous functions
 
-- The new feature of "Static anonymous functions" in C# 9.0 enhances performance and prevents capturing local variables unintentionally. In previous versions, anonymous functions could capture local variables from their enclosing scope, potentially leading to unintentional memory usage and longer lifetimes for those variables. The "static" keyword now can be applied to anonymous functions, indicating that the function does not capture any local variables. This results in more efficient code, especially in performance-critical applications, as it reduces heap allocations and simplifies garbage collection by avoiding closures over the local state.
+The new feature of "Static anonymous functions" in C# 9.0 enhances performance and prevents capturing local variables unintentionally. In previous versions, anonymous functions could capture local variables from their enclosing scope, potentially leading to unintentional memory usage and longer lifetimes for those variables. The "static" keyword now can be applied to anonymous functions, indicating that the function does not capture any local variables. This results in more efficient code, especially in performance-critical applications, as it reduces heap allocations and simplifies garbage collection by avoiding closures over the local state.
 
 - **Basic Static Anonymous Function**
 
@@ -946,11 +918,11 @@ _These examples illustrate various use cases for static anonymous functions in C
 
 ### Target-typed conditional expressions
 
-- The enhancement of "Target-typed conditional expressions" in C# 9.0 allows for more concise and readable code when working with conditional expressions. In earlier versions of C#, you might have needed explicit casting in certain conditional expressions, which could make the code longer and harder to read. With C# 9.0, the compiler is smarter in understanding the context of a conditional expression, reducing the need for such casts.
+The enhancement of "Target-typed conditional expressions" in C# 9.0 allows for more concise and readable code when working with conditional expressions. In earlier versions of C#, you might have needed explicit casting in certain conditional expressions, which could make the code longer and harder to read. With C# 9.0, the compiler is smarter in understanding the context of a conditional expression, reducing the need for such casts.
 
-- For example, previously, when you had a conditional operation where both outcomes were different types but compatible with the context's expected type, you would need to explicitly cast one or both outcomes to the expected type. C# 9.0 eliminates this need in many cases by inferring the type based on the target variable or context, making your code shorter and cleaner.
+For example, previously, when you had a conditional operation where both outcomes were different types but compatible with the context's expected type, you would need to explicitly cast one or both outcomes to the expected type. C# 9.0 eliminates this need in many cases by inferring the type based on the target variable or context, making your code shorter and cleaner.
 
-- This feature is particularly useful in scenarios where you are working with nullable value types or when the outcome of your conditional expression depends on a condition that returns different types that are implicitly convertible to a common type. The compiler's ability to infer the target type simplifies the syntax, enhancing code readability and maintainability.
+This feature is particularly useful in scenarios where you are working with nullable value types or when the outcome of your conditional expression depends on a condition that returns different types that are implicitly convertible to a common type. The compiler's ability to infer the target type simplifies the syntax, enhancing code readability and maintainability.
 
 - **Null Coalescing in Object Initialization**
 
@@ -1041,7 +1013,7 @@ widget.Display();
 
 ### Covariant return types
 
-- In C# 9.0, the concept of covariant return types was introduced to allow an override method in a derived class to return a type that is more derived than the return type of the method in the base class. This enhancement makes the type system more flexible, enabling scenarios where the derived class methods can return types that are more specific than those defined in their base class counterparts, without compromising type safety or requiring casts. This feature is particularly useful in cases where a method in a base class returns an instance of itself, and the derived class needs to return an instance of the derived type, ensuring that the method's return type is consistent with the object's type.
+In C# 9.0, the concept of covariant return types was introduced to allow an override method in a derived class to return a type that is more derived than the return type of the method in the base class. This enhancement makes the type system more flexible, enabling scenarios where the derived class methods can return types that are more specific than those defined in their base class counterparts, without compromising type safety or requiring casts. This feature is particularly useful in cases where a method in a base class returns an instance of itself, and the derived class needs to return an instance of the derived type, ensuring that the method's return type is consistent with the object's type.
 
 - **Basic Usage of Covariant Return Types**
 
@@ -1109,9 +1081,9 @@ EncryptedFile file = handler.OpenFile("path/to/encryptedfile"); // Directly get 
 
 ### Extension GetEnumerator support for foreach loops
 
-- The "Extension GetEnumerator support for foreach loops" feature in C# 9.0 introduces a way for developers to iterate over collections more flexibly. In earlier versions of C#, to use a collection in a foreach loop, that collection needed to directly implement the IEnumerable interface. This feature extends that capability by allowing developers to use extension methods to define how a foreach loop iterates through any type, even if that type does not directly implement IEnumerable.
+The "Extension GetEnumerator support for foreach loops" feature in C# 9.0 introduces a way for developers to iterate over collections more flexibly. In earlier versions of C#, to use a collection in a foreach loop, that collection needed to directly implement the IEnumerable interface. This feature extends that capability by allowing developers to use extension methods to define how a foreach loop iterates through any type, even if that type does not directly implement IEnumerable.
 
-- This means you can create a custom iteration method for types that weren't originally designed to be used in a foreach loop. For example, if you have a custom data structure not inheriting from IEnumerable, you can now write an extension method that provides the GetEnumerator method, making it usable with foreach. This enhancement simplifies code and enhances reusability by allowing more types to integrate seamlessly with foreach loops, making iterating over custom data structures or third-party types more straightforward, without needing to modify their source code or wrap them in a collection type.
+This means you can create a custom iteration method for types that weren't originally designed to be used in a foreach loop. For example, if you have a custom data structure not inheriting from IEnumerable, you can now write an extension method that provides the GetEnumerator method, making it usable with foreach. This enhancement simplifies code and enhances reusability by allowing more types to integrate seamlessly with foreach loops, making iterating over custom data structures or third-party types more straightforward, without needing to modify their source code or wrap them in a collection type.
 
 - **Using Extension `GetEnumerator` with a Custom Collection**
 
@@ -1196,11 +1168,9 @@ class Program
 
 ### Lambda discard parameters
 
-- The new "Lambda discard parameters" feature in C# 9.0 simplifies lambda expressions by allowing the use of underscores (\_) to signify parameters that are not used within the lambda's body. This means when you have a lambda expression where you don't need to use one or more of the parameters provided to it, you can replace those parameters with an underscore. This not only makes your code cleaner and easier to understand but also reduces the need for naming unused parameters. It's particularly useful in scenarios where you're working with higher-order functions or LINQ queries that require lambda expressions, but some parameters are irrelevant to the logic you're implementing.
+The new "Lambda discard parameters" feature in C# 9.0 simplifies lambda expressions by allowing the use of underscores (\_) to signify parameters that are not used within the lambda's body. This means when you have a lambda expression where you don't need to use one or more of the parameters provided to it, you can replace those parameters with an underscore. This not only makes your code cleaner and easier to understand but also reduces the need for naming unused parameters. It's particularly useful in scenarios where you're working with higher-order functions or LINQ queries that require lambda expressions, but some parameters are irrelevant to the logic you're implementing.
 
-- **Filtering a List**
-
-- Suppose you have a list of numbers, and you want to filter out only the even numbers using a lambda expression. You don't need the index provided by the `Select` method, so you can discard it.
+- **Filtering a List**: Suppose you have a list of numbers, and you want to filter out only the even numbers using a lambda expression. You don't need the index provided by the `Select` method, so you can discard it.
 
 ```csharp
 using System;
@@ -1224,9 +1194,7 @@ class Program
 
 - In the above example, `_` is used to discard the index parameter of the `Select` method since it's not used in the lambda expression.
 
-- **Event Handling**
-
-- Imagine you have a button in a GUI application, and you want to handle its click event. Often, you don't need the `sender` and `eventArgs` parameters provided by the event handler.
+- **Event Handling**: Imagine you have a button in a GUI application, and you want to handle its click event. Often, you don't need the `sender` and `eventArgs` parameters provided by the event handler.
 
 ```csharp
 using System;
@@ -1257,9 +1225,7 @@ class Program
 
 - Here, both parameters in the lambda expression are discarded because they are not needed to handle the click event.
 
-- **Exception Handling**
-
-- Sometimes, you might want to catch an exception but you're not interested in the exception object itself.
+- **Exception Handling**: Sometimes, you might want to catch an exception but you're not interested in the exception object itself.
 
 ```csharp
 using System;
@@ -1286,7 +1252,7 @@ class Program
 
 ### Attributes on local functions
 
-- In C# 9.0, a noteworthy enhancement is the introduction of "Attributes on local functions." This feature elevates the functionality of local functions, allowing developers to adorn them with attributes, a capability previously reserved for more prominent class-level methods. This augmentation opens the door to more refined control and adaptability in coding practices, enhancing the annotation capabilities directly within the scope of local functions. It's a concise yet potent enhancement, streamlining the coding process and expanding the versatility of local functions within the C# language.
+In C# 9.0, a noteworthy enhancement is the introduction of "Attributes on local functions." This feature elevates the functionality of local functions, allowing developers to adorn them with attributes, a capability previously reserved for more prominent class-level methods. This augmentation opens the door to more refined control and adaptability in coding practices, enhancing the annotation capabilities directly within the scope of local functions. It's a concise yet potent enhancement, streamlining the coding process and expanding the versatility of local functions within the C# language.
 
 - **Using a Custom Attribute on a Local Function**
 
@@ -1347,8 +1313,10 @@ public class Program
 
 ## Conclusion
 
-- C# 9.0 introduces a wealth of new features aimed at enhancing the clarity, simplicity, and expressiveness of code. With the introduction of records, developers are empowered to easily define immutable data models, promoting safer, more predictable programming practices. Init-only properties further support immutability, allowing objects to be fully initialized in a flexible yet controlled manner. The simplification provided by top-level statements and the depth added by pattern matching enhancements make C# more approachable to newcomers while offering seasoned developers powerful tools for code expression.
+C# 9.0 introduces a wealth of new features aimed at enhancing the clarity, simplicity, and expressiveness of code. With the introduction of records, developers are empowered to easily define immutable data models, promoting safer, more predictable programming practices. Init-only properties further support immutability, allowing objects to be fully initialized in a flexible yet controlled manner. The simplification provided by top-level statements and the depth added by pattern matching enhancements make C# more approachable to newcomers while offering seasoned developers powerful tools for code expression.
 
-- Performance and interop features, such as native sized integers and function pointers, address high-performance computing needs, enabling more efficient operations and interaction with unmanaged code. Additionally, language enhancements like target-typed new expressions and static anonymous functions streamline coding patterns and improve performance.
+Performance and interop features, such as native sized integers and function pointers, address high-performance computing needs, enabling more efficient operations and interaction with unmanaged code. Additionally, language enhancements like target-typed new expressions and static anonymous functions streamline coding patterns and improve performance.
 
-- In conclusion, C# 9.0 significantly enriches the language, making it more versatile and developer-friendly. These improvements continue to position C# as a leading choice for modern software development, catering to a broad spectrum of programming paradigms and applications. By embracing these new features, developers can leverage the full potential of C# to build robust, efficient, and maintainable software solutions.
+In conclusion, C# 9.0 significantly enriches the language, making it more versatile and developer-friendly. These improvements continue to position C# as a leading choice for modern software development, catering to a broad spectrum of programming paradigms and applications. By embracing these new features, developers can leverage the full potential of C# to build robust, efficient, and maintainable software solutions.
+
+[Previous: C# 8.0 New Features Overview](./csharp-8.0.md) | [Back to main page](../../README.md) | [Next: C# 10.0 New Features Overview](./csharp-10.0.md)

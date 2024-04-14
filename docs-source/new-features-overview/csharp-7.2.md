@@ -1,10 +1,10 @@
-# C# 7.2 New Features Guide
+# C# 7.2 New Features Overview
 
 ## Table of Contents
 
-- [C# 7.2 New Features Guide](#c-72-new-features-guide)
+- [C# 7.2 New Features Overview](#c-72-new-features-overview)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
     - [Leading Underscores in Numeric Literals](#leading-underscores-in-numeric-literals)
     - [Non-trailing Named Arguments](#non-trailing-named-arguments)
@@ -15,47 +15,63 @@
     - [Readonly Ref](#readonly-ref)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
 In C# 7.2, new features make coding more efficient and clear. These include leading underscores in numeric literals for better readability, non-trailing named arguments that allow for flexible method calls, and the `Span<T>` type for efficient memory use. Additionally, the `private protected` access modifier offers precise control over class access, while `ref` enhancements enable powerful data manipulation. `readonly ref` ensures data integrity when sharing. These updates simplify complex tasks, ensuring code is more manageable and performant.
+as
 
 ## New Features
 
 ### Leading Underscores in Numeric Literals
 
-- In C# 7.2, a small but helpful feature was introduced for numeric literals: leading underscores. Before this update, you could already use underscores within numeric literals to make them easier to read, like separating groups of digits in large numbers. However, C# 7.2 allows you to place underscores right after the base specifier of binary `(0b)` and hexadecimal `(0x)` literals. This means you can now write numbers in a way that visually separates the base specifier from the number itself, making your code clearer. For example, binary and hexadecimal numbers can start with `0b_` and `0x_` respectively, followed by the actual digits with optional additional underscores for further separation. This change is all about making your numeric literals more readable and maintainable.
+In C# 7.2, a small but helpful feature was introduced for numeric literals: leading underscores. Before this update, you could already use underscores within numeric literals to make them easier to read, like separating groups of digits in large numbers. However, C# 7.2 allows you to place underscores right after the base specifier of binary `(0b)` and hexadecimal `(0x)` literals. This means you can now write numbers in a way that visually separates the base specifier from the number itself, making your code clearer. For example, binary and hexadecimal numbers can start with `0b_` and `0x_` respectively, followed by the actual digits with optional additional underscores for further separation. This change is all about making your numeric literals more readable and maintainable.
+
+- **Decimal Numbers**
+
+  - **Old Way**:
 
   ```csharp
-      int million = 1_000_000;
-      Console.WriteLine(million);  // Output: 1000000
+  int million = 1000000;
+  Console.WriteLine(million);  // Output: 1000000
   ```
 
-- **Old Way**: Hexadecimal, digit separators could be used as follows
+  - **New Way**:
 
   ```csharp
-      int million = 1000000;
-      Console.WriteLine(million);  // Output: 1000000
+  int million = 1_000_000;
+  Console.WriteLine(million);  // Output: 1000000
   ```
 
-- **New Way**: Hexadecimal, you can now also place an underscore right after the `0x`
+- **Binary Numbers**
+
+  - **Old Way**:
 
   ```csharp
-      int color = 0x_FF_FF_FF;
-      Console.WriteLine(color);  // Output: 16777215
+  int bValue = 0b1010_1011_1100_1101;
+  Console.WriteLine(bValue);  // Output: 43981
   ```
 
-- **Old Way**: Binary, binary literals could be written with digit separators for readability
+  - **New Way**:
 
   ```csharp
-      int bValue = 0b1010_1011_1100_1101;
-      Console.WriteLine(bValue);  // Output: 43981
+  int bValue = 0b_1010_1011_1100_1101;
+  Console.WriteLine(bValue);  // Output: 43981
   ```
 
-- **New Way**: Binary, allows leading underscores right after the `0b`
+- **Hexadecimal Numbers**
+
+  - **Old Way**:
 
   ```csharp
-      int bValue = 0b_1010_1011_1100_1101;
-      Console.WriteLine(bValue);  // Output: 43981
+  int color = 0xFFFFFF;
+  Console.WriteLine(color);  // Output: 16777215
+  ```
+
+  - **New Way**:
+
+  ```csharp
+  int color = 0x_FF_FF_FF;
+  Console.WriteLine(color);  // Output: 16777215
   ```
 
 - **Representing a Bit Field**
@@ -92,27 +108,27 @@ In C# 7.2, new features make coding more efficient and clear. These include lead
 
 ### Non-trailing Named Arguments
 
-- In C# 7.2, a new feature called "Non-trailing Named Arguments" was introduced. This feature allows you to specify arguments for a method in any order by naming them, even if they are not at the end of the argument list. Previously, when using named arguments, any positional arguments had to come first, followed by the named ones. With this update, you can mix named and positional arguments freely as long as the named arguments are placed in their correct positions according to the method's parameter list. This makes the code more readable and flexible, especially in cases where you want to specify only some arguments by name for clarity while leaving others in their positional order.
+In C# 7.2, a new feature called "Non-trailing Named Arguments" was introduced. This feature allows you to specify arguments for a method in any order by naming them, even if they are not at the end of the argument list. Previously, when using named arguments, any positional arguments had to come first, followed by the named ones. With this update, you can mix named and positional arguments freely as long as the named arguments are placed in their correct positions according to the method's parameter list. This makes the code more readable and flexible, especially in cases where you want to specify only some arguments by name for clarity while leaving others in their positional order.
 
-  ```csharp
-    void SendEmail(string to, string subject, string body, bool ccAdmin = false);
+```csharp
+  void SendEmail(string to, string subject, string body, bool ccAdmin = false);
 
-    // Invoking the method without using Non-trailing Named Arguments
-    SendEmail("example@example.com", "Hello World", "This is a test email.", ccAdmin: true);
+  // Invoking the method without using Non-trailing Named Arguments
+  SendEmail("example@example.com", "Hello World", "This is a test email.", ccAdmin: true);
 
-    // Invoking the method with Non-trailing Named Arguments, allowing the 'ccAdmin' named argument to be specified before 'subject' and 'body'
-    SendEmail("example@example.com", ccAdmin: true, subject: "Hello World", body: "This is a test email.");
-  ```
+  // Invoking the method with Non-trailing Named Arguments, allowing the 'ccAdmin' named argument to be specified before 'subject' and 'body'
+  SendEmail("example@example.com", ccAdmin: true, subject: "Hello World", body: "This is a test email.");
+```
 
-  ```csharp
-    void CreateReport(string title, bool includeHeader = true, bool includeFooter = false, string dateFormat = "MM/dd/yyyy");
+```csharp
+  void CreateReport(string title, bool includeHeader = true, bool includeFooter = false, string dateFormat = "MM/dd/yyyy");
 
-    // Invoking the method without using Non-trailing Named Arguments
-    CreateReport("Annual Report", true, includeFooter: true, dateFormat: "yyyy-MM-dd");
+  // Invoking the method without using Non-trailing Named Arguments
+  CreateReport("Annual Report", true, includeFooter: true, dateFormat: "yyyy-MM-dd");
 
-    // Invoking the method with Non-trailing Named Arguments, allowing the 'includeFooter' and 'dateFormat' named arguments to be specified without mentioning 'includeHeader'
-    CreateReport("Annual Report", includeFooter: true, dateFormat: "yyyy-MM-dd");
-  ```
+  // Invoking the method with Non-trailing Named Arguments, allowing the 'includeFooter' and 'dateFormat' named arguments to be specified without mentioning 'includeHeader'
+  CreateReport("Annual Report", includeFooter: true, dateFormat: "yyyy-MM-dd");
+```
 
 - **Usage in Object Initializers**
 
@@ -137,13 +153,13 @@ In C# 7.2, new features make coding more efficient and clear. These include lead
 
 ### Contiguous Memory Accessor for Stack-Allocated Structures `Span<T>`
 
-- In C# 7.2, a new feature called `Span<T>` was introduced. This feature is a special kind of structure that allows for more efficient handling of certain kinds of data, such as arrays or slices of memory. Unlike regular structures, `Span<T>` is a "stack-only" type, meaning it is designed to be used and stored in a method's local memory space rather than on the heap, which is used for longer-lived data.
+In C# 7.2, a new feature called `Span<T>` was introduced. This feature is a special kind of structure that allows for more efficient handling of certain kinds of data, such as arrays or slices of memory. Unlike regular structures, `Span<T>` is a "stack-only" type, meaning it is designed to be used and stored in a method's local memory space rather than on the heap, which is used for longer-lived data.
 
-- The main advantage of `Span<T>` is that it provides a way to access a continuous region of memory, such as an array, without the need for copying or allocating additional memory. This can lead to significant performance improvements in applications that process large amounts of data or perform complex memory operations.
+The main advantage of `Span<T>` is that it provides a way to access a continuous region of memory, such as an array, without the need for copying or allocating additional memory. This can lead to significant performance improvements in applications that process large amounts of data or perform complex memory operations.
 
-- `Span<T>` is referred to by several names, including "interior pointer" and "stackonly struct." These names highlight its unique characteristics: it acts like a pointer to data within another data structure and is constrained to live only on the stack. This constraint ensures that `Span<T>` instances are always used in a safe manner, avoiding issues related to memory management and garbage collection that can affect application performance.
+`Span<T>` is referred to by several names, including "interior pointer" and "stackonly struct." These names highlight its unique characteristics: it acts like a pointer to data within another data structure and is constrained to live only on the stack. This constraint ensures that `Span<T>` instances are always used in a safe manner, avoiding issues related to memory management and garbage collection that can affect application performance.
 
-- Overall, the introduction of `Span<T>` in C# 7.2 provides developers with a powerful tool for improving the efficiency of memory operations in their applications, making it easier to work with data in a high-performance manner.
+Overall, the introduction of `Span<T>` in C# 7.2 provides developers with a powerful tool for improving the efficiency of memory operations in their applications, making it easier to work with data in a high-performance manner.
 
 - Basic Usage of `Span<T>`: This example shows how to create a `Span<T>` from an array. We change the first element and slice part of the `Span`. This demonstrates that changes in `Span` affect the original array.
 
@@ -276,7 +292,7 @@ In C# 7.2, new features make coding more efficient and clear. These include lead
 
 ### Private Protected Access Modifier
 
-- In C# 7.2, a new feature called "Private Protected Access Modifier" was introduced. This access modifier combines the properties of both `protected` and `internal` modifiers. It allows a class member to be accessed by derived classes located in the same assembly. This means that if you have a class with a member marked as `private protected`, this member can be used in subclasses but only if these subclasses are within the same assembly. It provides a more specific level of access control, offering a blend of the protection and internal visibility, making it useful for more controlled inheritance scenarios.
+In C# 7.2, a new feature called "Private Protected Access Modifier" was introduced. This access modifier combines the properties of both `protected` and `internal` modifiers. It allows a class member to be accessed by derived classes located in the same assembly. This means that if you have a class with a member marked as `private protected`, this member can be used in subclasses but only if these subclasses are within the same assembly. It provides a more specific level of access control, offering a blend of the protection and internal visibility, making it useful for more controlled inheritance scenarios.
 
 - **Basic Example**: Consider a base class in an assembly that uses the `private protected` access modifier
 
@@ -352,11 +368,11 @@ Assuming `BaseClass` is defined in AssemblyA, and we have the following in Assem
    }
 ```
 
-This setup ensures that only your shapes can apply the base rendering configurations, keeping these details encapsulated within your library's inheritance hierarchy.
+- This setup ensures that only your shapes can apply the base rendering configurations, keeping these details encapsulated within your library's inheritance hierarchy.
 
 ### Ref Conditional Expression
 
-- In C# 7.2, a new feature called "Ref Conditional Expression" was introduced. This feature allows programmers to choose between two references based on a condition, similar to how you might choose between two values with a conditional operator. Before, this wasn't possible with references. Now, you can write more flexible code by using a condition to decide which reference to use in your operations. This is especially useful when you want to work directly with the memory locations of variables for efficiency or when dealing with large data structures.
+In C# 7.2, a new feature called "Ref Conditional Expression" was introduced. This feature allows programmers to choose between two references based on a condition, similar to how you might choose between two values with a conditional operator. Before, this wasn't possible with references. Now, you can write more flexible code by using a condition to decide which reference to use in your operations. This is especially useful when you want to work directly with the memory locations of variables for efficiency or when dealing with large data structures.
 
 - **Basic Usage of Ref Conditional Expression**
 
@@ -462,7 +478,7 @@ This setup ensures that only your shapes can apply the base rendering configurat
 
 ### Ref extension methods on structs
 
-- In C# 7.2, a new feature called "ref extension methods on structs" was introduced. This feature allows methods to be extended by reference, specifically for structures (structs). Normally, extension methods enable adding new methods to existing types without altering the type itself. The "ref" keyword in this context means that the method operates directly on the original structure rather than on a copy of it. This is particularly useful for large structures where copying can be expensive in terms of performance. It allows for more efficient code execution, especially when modifying large structs, by avoiding unnecessary copying of data.
+In C# 7.2, a new feature called "ref extension methods on structs" was introduced. This feature allows methods to be extended by reference, specifically for structures (structs). Normally, extension methods enable adding new methods to existing types without altering the type itself. The "ref" keyword in this context means that the method operates directly on the original structure rather than on a copy of it. This is particularly useful for large structures where copying can be expensive in terms of performance. It allows for more efficient code execution, especially when modifying large structs, by avoiding unnecessary copying of data.
 
 - **Mutating a struct instance with `ref` extension method**
 
@@ -567,7 +583,7 @@ This setup ensures that only your shapes can apply the base rendering configurat
 
 ### Readonly Ref
 
-- In C# 7.2, a new feature called "Readonly ref" was introduced. This feature allows you to create references to data that cannot be modified. Normally, when you pass data using references, the data can be changed by the receiver. However, with "Readonly ref," you ensure that the data you share cannot be altered, providing a way to safely share information without the risk of unexpected modifications. This feature is useful when you want to maintain the integrity of your data while allowing others to access it.
+In C# 7.2, a new feature called "Readonly ref" was introduced. This feature allows you to create references to data that cannot be modified. Normally, when you pass data using references, the data can be changed by the receiver. However, with "Readonly ref," you ensure that the data you share cannot be altered, providing a way to safely share information without the risk of unexpected modifications. This feature is useful when you want to maintain the integrity of your data while allowing others to access it.
 
 - **Using `readonly ref` Return**: This code shows how to return a `readonly` reference to a struct. A `readonly` reference means you can look but not change the value. We define a `Point` struct with `X` and `Y` values, and a special `Origin` point that's always at `(0, 0)`. When we use `Origin`, we can see its `X` and `Y`, but we can't change them because it's `readonly`.
 
@@ -704,3 +720,5 @@ This setup ensures that only your shapes can apply the base rendering configurat
 ## Conclusion
 
 C# 7.2 introduces a suite of features enhancing code clarity, efficiency, and safety. With additions like leading underscores in numeric literals and non-trailing named arguments, developers gain tools for more readable and flexible coding practices. The introduction of `Span<T>` marks a significant leap in memory management, optimizing performance in data-intensive applications. Furthermore, the new access modifier and `ref` enhancements fortify the language's capability in encapsulation and data manipulation. Finally, `readonly ref` addresses data integrity, ensuring safer code sharing and manipulation. Collectively, these advancements fortify C#'s standing as a robust, modern programming language tailored for contemporary software development challenges.
+
+[Previous: C# 7.1 New Features Overview](./csharp-7.1.md) | [Back to main page](../../README.md) | [Next: C# 7.3 New Features Overview](./csharp-7.3.md)

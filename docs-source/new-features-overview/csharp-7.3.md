@@ -1,25 +1,23 @@
-# C# 7.3 New Features Guide
+# C# 7.3 New Features Overview
 
 ## Table of Contents
 
-- [C# 7.3 New Features Guide](#c-73-new-features-guide)
+- [C# 7.3 New Features Overview](#c-73-new-features-overview)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
-    - [Performance Enhancements for Safe Code](#performance-enhancements-for-safe-code)
-      - [Enhanced Access to Fixed Fields](#enhanced-access-to-fixed-fields)
-      - [Flexible Ref Local Variables](#flexible-ref-local-variables)
-      - [Stackalloc Array Initializers](#stackalloc-array-initializers)
-      - [Extended Fixed Statement Usability](#extended-fixed-statement-usability)
-      - [Expanded Generic Constraints](#expanded-generic-constraints)
-    - [Incremental Improvements](#incremental-improvements)
-      - [Tuple Equality Operations](#tuple-equality-operations)
-      - [Broader Expression Variable Scope](#broader-expression-variable-scope)
-      - [Attributes on Auto-Implemented Property Backing Fields](#attributes-on-auto-implemented-property-backing-fields)
-      - [Refined Method Resolution Logic](#refined-method-resolution-logic)
+    - [Enhanced Access to Fixed Fields](#enhanced-access-to-fixed-fields)
+    - [Flexible Ref Local Variables](#flexible-ref-local-variables)
+    - [Stackalloc Array Initializers](#stackalloc-array-initializers)
+    - [Extended Fixed Statement Usability](#extended-fixed-statement-usability)
+    - [Expanded Generic Constraints](#expanded-generic-constraints)
+    - [Tuple Equality Operations](#tuple-equality-operations)
+    - [Broader Expression Variable Scope](#broader-expression-variable-scope)
+    - [Attributes on Auto-Implemented Property Backing Fields](#attributes-on-auto-implemented-property-backing-fields)
+    - [Refined Method Resolution Logic](#refined-method-resolution-logic)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
 Welcome to the guide on the new features introduced in C# 7.3! This version of C# brings several enhancements aimed at making your code more efficient, safer, and easier to write. At the heart of these updates is a significant focus on performance enhancements for safe code. For instance, C# 7.3 allows for direct access to fixed fields without needing to pin them, making interactions with unmanaged code much smoother and faster. Additionally, there are new flexible ways to work with `ref` local variables, improvements for stack-allocated arrays, and more versatile `fixed` statements.
 
@@ -29,11 +27,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
 
 ## New Features
 
-### Performance Enhancements for Safe Code
+### Enhanced Access to Fixed Fields
 
-#### Enhanced Access to Fixed Fields
-
-- In C# 7.3, a notable improvement was made regarding how programmers can work with "fixed fields". Previously, working with fixed fields, especially when dealing with unmanaged code or performing operations that require pinning objects in memory, could be cumbersome and required extra steps for safety and performance. The update simplifies these interactions, making it possible to access fixed fields directly without needing to pin them first. This change allows for more efficient code, especially in scenarios where performance is critical, by reducing the overhead and complexity associated with pinning. This enhancement is part of C# 7.3's broader efforts to make safe code perform as efficiently as unsafe code, streamlining development without compromising on safety.
+In C# 7.3, a notable improvement was made regarding how programmers can work with "fixed fields". Previously, working with fixed fields, especially when dealing with unmanaged code or performing operations that require pinning objects in memory, could be cumbersome and required extra steps for safety and performance. The update simplifies these interactions, making it possible to access fixed fields directly without needing to pin them first. This change allows for more efficient code, especially in scenarios where performance is critical, by reducing the overhead and complexity associated with pinning. This enhancement is part of C# 7.3's broader efforts to make safe code perform as efficiently as unsafe code, streamlining development without compromising on safety.
 
 - **Old Way:**
 
@@ -81,9 +77,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
      }
   ```
 
-#### Flexible Ref Local Variables
+### Flexible Ref Local Variables
 
-- In C# 7.3, a new feature was introduced called "Flexible Ref Local Variables." This feature allows programmers to reassign `ref` local variables to point to different locations during their lifetime. Essentially, if you have a variable that references a certain piece of data, you can now change it to reference another piece of data. This adds more versatility and control in handling data that is passed by reference, making code more efficient and easier to manage in certain scenarios.
+In C# 7.3, a new feature was introduced called "Flexible Ref Local Variables." This feature allows programmers to reassign `ref` local variables to point to different locations during their lifetime. Essentially, if you have a variable that references a certain piece of data, you can now change it to reference another piece of data. This adds more versatility and control in handling data that is passed by reference, making code more efficient and easier to manage in certain scenarios.
 
 - **Swapping References**
 
@@ -156,9 +152,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
       }
   ```
 
-#### Stackalloc Array Initializers
+### Stackalloc Array Initializers
 
-- In C# 7.3, a new feature called "Stackalloc Array Initializers" was introduced. This feature allows developers to easily initialize arrays in the stack memory, rather than the heap, by using a familiar syntax. This means you can quickly set up arrays with predefined values right at the moment of their creation, making your code cleaner and more efficient. This feature is particularly useful for high-performance applications where managing memory efficiently is crucial.
+In C# 7.3, a new feature called "Stackalloc Array Initializers" was introduced. This feature allows developers to easily initialize arrays in the stack memory, rather than the heap, by using a familiar syntax. This means you can quickly set up arrays with predefined values right at the moment of their creation, making your code cleaner and more efficient. This feature is particularly useful for high-performance applications where managing memory efficiently is crucial.
 
 - **Basic Initialization**
 
@@ -241,9 +237,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
       }
   ```
 
-#### Extended Fixed Statement Usability
+### Extended Fixed Statement Usability
 
-- In C# 7.3, the `fixed` statement was enhanced to allow for more flexible and convenient usage. The `fixed` statement is used in unsafe contexts to pin objects in memory, preventing the garbage collector from moving them. This is often necessary when working with unmanaged code or when performance optimizations are required. The improvements in C# 7.3 make it easier to work with fixed buffers and arrays, simplifying the process and reducing the boilerplate code needed to achieve the desired results.
+In C# 7.3, the `fixed` statement was enhanced to allow for more flexible and convenient usage. The `fixed` statement is used in unsafe contexts to pin objects in memory, preventing the garbage collector from moving them. This is often necessary when working with unmanaged code or when performance optimizations are required. The improvements in C# 7.3 make it easier to work with fixed buffers and arrays, simplifying the process and reducing the boilerplate code needed to achieve the desired results.
 
 - **Pattern-based `fixed` statement**
 
@@ -317,9 +313,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
       }
   ```
 
-#### Expanded Generic Constraints
+### Expanded Generic Constraints
 
-- This feature allows developers to be more specific about the types they use in their generic methods or classes. For example, they can now specify that a type parameter must be an enum, delegate, or an `unmanaged` type. An `unmanaged` type is a special kind of type that does not contain any references to the managed memory and is safe to use with unmanaged code. This improvement makes the code safer and more efficient, especially when working with low-level programming tasks. It helps developers avoid errors by enforcing stricter type checks at compile time.
+This feature allows developers to be more specific about the types they use in their generic methods or classes. For example, they can now specify that a type parameter must be an enum, delegate, or an `unmanaged` type. An `unmanaged` type is a special kind of type that does not contain any references to the managed memory and is safe to use with unmanaged code. This improvement makes the code safer and more efficient, especially when working with low-level programming tasks. It helps developers avoid errors by enforcing stricter type checks at compile time.
 
 - **`enum` Constraint**
 
@@ -402,11 +398,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
       // Output: 42
   ```
 
-### Incremental Improvements
+### Tuple Equality Operations
 
-#### Tuple Equality Operations
-
-- In C# 7.3, a new feature was introduced allowing for the direct comparison of tuple types using the == and != operators. This means you can now check if two tuples are equal or not by comparing their corresponding elements. For example, if you have two tuples representing two sets of data, you can easily check if they contain the same values in the same order. This simplifies code and makes it more readable when working with tuples, as you no longer need to compare each element individually.
+In C# 7.3, a new feature was introduced allowing for the direct comparison of tuple types using the == and != operators. This means you can now check if two tuples are equal or not by comparing their corresponding elements. For example, if you have two tuples representing two sets of data, you can easily check if they contain the same values in the same order. This simplifies code and makes it more readable when working with tuples, as you no longer need to compare each element individually.
 
 - **Basic Tuple Equality and Inequality**
 
@@ -472,9 +466,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
     bool mixedAreEqual = mixedTuple1 == mixedTuple2; // true, due to implicit conversion of second element from int to double
 ```
 
-#### Broader Expression Variable Scope
+### Broader Expression Variable Scope
 
-- In C# 7.3, the scope of expression variables was expanded to include the entire expression in which they are declared. Previously, expression variables were limited to the specific subexpression in which they were defined. This change allows developers to use expression variables more flexibly and access them throughout the entire expression, making code more concise and readable. It also aligns with the language's goal of improving the developer experience and reducing boilerplate code.
+In C# 7.3, the scope of expression variables was expanded to include the entire expression in which they are declared. Previously, expression variables were limited to the specific subexpression in which they were defined. This change allows developers to use expression variables more flexibly and access them throughout the entire expression, making code more concise and readable. It also aligns with the language's goal of improving the developer experience and reducing boilerplate code.
 
 - **Old Way:**
 
@@ -546,9 +540,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
       }
   ```
 
-#### Attributes on Auto-Implemented Property Backing Fields
+### Attributes on Auto-Implemented Property Backing Fields
 
-- In C# 7.3, a new feature was introduced allowing developers to apply attributes directly to the backing fields of auto-implemented properties. Previously, if you wanted to attach an attribute to a property's backing field, you had to manually define the field and property. This process was more verbose and time-consuming. The update simplifies this by allowing the use of attributes with the `field:` target prefix directly on auto-implemented properties. This means you can now easily apply attributes like `[NonSerialized]` to the hidden backing field of an auto-implemented property, enhancing control over serialization and other behaviors directly in your property definitions, without additional boilerplate code.
+In C# 7.3, a new feature was introduced allowing developers to apply attributes directly to the backing fields of auto-implemented properties. Previously, if you wanted to attach an attribute to a property's backing field, you had to manually define the field and property. This process was more verbose and time-consuming. The update simplifies this by allowing the use of attributes with the `field:` target prefix directly on auto-implemented properties. This means you can now easily apply attributes like `[NonSerialized]` to the hidden backing field of an auto-implemented property, enhancing control over serialization and other behaviors directly in your property definitions, without additional boilerplate code.
 
 - **Applying NonSerialized Attribute**
 
@@ -627,9 +621,9 @@ Whether you are working on high-performance applications, dealing with unmanaged
       }
   ```
 
-#### Refined Method Resolution Logic
+### Refined Method Resolution Logic
 
-- In C# 7.3, the method resolution logic has been improved to make it easier for developers to work with overloaded methods. This update focuses on ensuring that the most appropriate method is selected when multiple options are available, reducing the chances of encountering errors or ambiguities. The main adjustments include better handling of static and instance members, removing generic methods that don't meet type constraints from consideration, and refining how method group conversions are processed. These enhancements aim to streamline the coding experience, making it more intuitive and error-free when calling methods, especially those that are overloaded.
+In C# 7.3, the method resolution logic has been improved to make it easier for developers to work with overloaded methods. This update focuses on ensuring that the most appropriate method is selected when multiple options are available, reducing the chances of encountering errors or ambiguities. The main adjustments include better handling of static and instance members, removing generic methods that don't meet type constraints from consideration, and refining how method group conversions are processed. These enhancements aim to streamline the coding experience, making it more intuitive and error-free when calling methods, especially those that are overloaded.
 
 - **Static vs. Instance Members**
 
@@ -696,3 +690,5 @@ In conclusion, C# 7.3 marks a significant step forward in the evolution of the C
 Furthermore, incremental improvements like tuple equality operations and broader expression variable scopes make the language more intuitive and enjoyable to use, while updates to method resolution logic ensure that the most appropriate methods are called in overloaded scenarios, reducing errors and improving code clarity.
 
 Overall, C# 7.3 embodies the ongoing commitment to language innovation, providing developers with the tools they need to meet the challenges of modern software development. Whether you are optimizing performance-critical code, leveraging new language features to reduce boilerplate, or ensuring type safety with enhanced constraints, C# 7.3 offers a compelling array of new capabilities to explore and integrate into your projects.
+
+[Previous: C# 7.2 New Features Overview](./csharp-7.2.md) | [Back to main page](../../README.md) | [Next: C# 8.0 New Features Overview](./csharp-8.0.md)

@@ -1,29 +1,23 @@
-# C# 7.0 New Features Guide
+# C# 7.0 New Features Overview
 
 ## Table of Contents
 
-- [C# 7.0 New Features Guide](#c-70-new-features-guide)
+- [C# 7.0 New Features Overview](#c-70-new-features-overview)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
     - [Tuples and Deconstruction](#tuples-and-deconstruction)
     - [Pattern Matching](#pattern-matching)
-      - [Constant Patterns](#constant-patterns)
-      - [Type Patterns](#type-patterns)
-      - [Var Patterns](#var-patterns)
-      - [A Comprehensive Example](#a-comprehensive-example)
     - [Local Functions](#local-functions)
     - [Ref Returns and Locals](#ref-returns-and-locals)
     - [Out Variables](#out-variables)
     - [Literal Improvements](#literal-improvements)
-      - [Binary Literals](#binary-literals)
-      - [Digit Separators](#digit-separators)
     - [Generalized Async Return Types](#generalized-async-return-types)
     - [Expression Bodied Members Expansion](#expression-bodied-members-expansion)
     - [Throw Expressions](#throw-expressions)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
 C# 7.0 brought many improvements that make coding easier and more efficient. Features like Tuples let you return multiple values from functions, and Pattern Matching offers smarter ways to handle data. Local Functions enable more organized code, while Ref Returns improve performance. Out Variables, Literal Improvements, and Expanded Expression Bodied Members simplify syntax. Finally, Generalized Async Return Types and Throw Expressions enhance flexibility in handling operations and errors.
 
@@ -31,7 +25,8 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 ### Tuples and Deconstruction
 
-- **Tuples** are a feature in C# that allows you to store multiple values within a single object. Think of them like a container where you can keep various items, but unlike a box, you can access each item directly by its position or a name if you've given one. This can be incredibly handy when you want to return more than one value from a method without creating a specific class or structure for that purpose.
+**Tuples** are a feature in C# that allows you to store multiple values within a single object. Think of them like a container where you can keep various items, but unlike a box, you can access each item directly by its position or a name if you've given one. This can be incredibly handy when you want to return more than one value from a method without creating a specific class or structure for that purpose.
+
 - **Defining and using a Tuple**
 
   ```csharp
@@ -71,12 +66,12 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
   Console.WriteLine($"Name: {personDetails.Name}, Age: {personDetails.Age}, HasPet: {personDetails.HasPet}");
   ```
 
-- **Deconstruction** is a feature that allows you to break a tuple into its individual components and assign them to separate variables. This can be done in a single line of code, making it easy to work with the values stored in a tuple.
+**Deconstruction** is a feature that allows you to break a tuple into its individual components and assign them to separate variables. This can be done in a single line of code, making it easy to work with the values stored in a tuple.
 
-  ```csharp
-  var (string name, int age, bool hasPet) = GetPersonDetails();
-  Console.WriteLine($"Name: {name}, Age: {age}, HasPet: {hasPet}");
-  ```
+```csharp
+var (string name, int age, bool hasPet) = GetPersonDetails();
+Console.WriteLine($"Name: {name}, Age: {age}, HasPet: {hasPet}");
+```
 
 - In the above example, the tuple returned by `GetPersonDetails` is deconstructed into three separate variables: `name`, `age`, and `hasPet`. You can then use these variables as needed.
 
@@ -119,11 +114,9 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 ### Pattern Matching
 
-- Pattern matching in C# 7.0 is a powerful feature that allows you to write more concise and readable code. It enables you to check the type of an object and its properties in a more fluid and intuitive way. C# 7.0 introduces three types of patterns: constant patterns, type patterns, and var patterns. Let's delve into each of these with some examples to help you understand how they work.
+Pattern matching in C# 7.0 is a powerful feature that allows you to write more concise and readable code. It enables you to check the type of an object and its properties in a more fluid and intuitive way. C# 7.0 introduces three types of patterns: constant patterns, type patterns, and var patterns. Let's delve into each of these with some examples to help you understand how they work.
 
-#### Constant Patterns
-
-- These patterns allow you to check if a value is equal to a specific constant. This can be useful when you want to perform different actions based on the value of a variable.
+- **Constant Patterns**: These patterns allow you to check if a value is equal to a specific constant. This can be useful when you want to perform different actions based on the value of a variable.
 
   ```csharp
   object value = "Hello World";
@@ -135,9 +128,7 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 - In the above example, the constant pattern checks if the value of the object is equal to "Hello World" and executes the corresponding code block if the condition is true.
 
-#### Type Patterns
-
-- Type patterns allow you to check if an object is of a specific type and optionally cast it to that type in a single operation. This can help you avoid writing multiple if-else blocks to handle different types of objects.
+- **Type Patterns**: Type patterns allow you to check if an object is of a specific type and optionally cast it to that type in a single operation. This can help you avoid writing multiple if-else blocks to handle different types of objects.
 
   ```csharp
   object obj = 123;
@@ -149,9 +140,7 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 - Here, the type pattern checks if obj is an int and directly assigns its value to the variable number if it is. This eliminates the need for separate type checking and casting operations.
 
-#### Var Patterns
-
-- The var pattern always matches the object it's compared to and assigns it to a variable. This might seem unnecessary at first glance, as it always succeeds, but it can be useful in switch statements to catch all cases not covered by other patterns.
+- **Var Patterns**: The var pattern always matches the object it's compared to and assigns it to a variable. This might seem unnecessary at first glance, as it always succeeds, but it can be useful in switch statements to catch all cases not covered by other patterns.
 
   ```csharp
   object anything = new object();
@@ -163,91 +152,122 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 - Even though the var pattern will always succeed, it's useful for assigning the matched object to a variable (`thing` in this case) for further operations.
 
-#### A Comprehensive Example
-
-- Let's put all these patterns together in a more comprehensive example to demonstrate how they can be used in different scenarios.
+- **A Comprehensive Example**: Let's put all these patterns together in a more comprehensive example to demonstrate how they can be used in different scenarios.
 
   ```csharp
-  public abstract class Shape
-  {
-    public abstract double Area();
-  }
-
-  public class Circle : Shape
-  {
-    public double Radius { get; }
-
-    public Circle(double radius) => Radius = radius;
-
-    public override double Area() => Math.PI * Math.Pow(Radius, 2);
-  }
-
-  public class Rectangle : Shape
-  {
-    public double Length { get; }
-    public double Width { get; }
-
-    public Rectangle(double length, double width)
+    // Abstract base class for shapes, requiring implementation of an Area method.
+    public abstract class Shape
     {
-        Length = length;
-        Width = width;
+        public abstract double Area();
     }
 
-    public override double Area() => Length * Width;
-  }
-
-  public class Triangle : Shape
-  {
-    public double Base { get; }
-    public double Height { get; }
-
-    public Triangle(double @base, double height)
+    // Derived class for circles, inherits from Shape.
+    public class Circle : Shape
     {
-        Base = @base;
-        Height = height;
+        // Property to hold the radius of the circle.
+        public double Radius { get; }
+
+        // Constructor initializes the radius.
+        public Circle(double radius) => Radius = radius;
+
+        // Overridden Area method computes area of the circle.
+        public override double Area() => Math.PI * Math.Pow(Radius, 2);
     }
 
-    public override double Area() => 0.5 * Base * Height;
-  }
+    // Derived class for rectangles, inherits from Shape.
+    public class Rectangle : Shape
+    {
+        // Properties to hold the length and width of the rectangle.
+        public double Length { get; }
+        public double Width { get; }
 
-  public static void PrintCircleArea(Shape shape)
-  {
-    if (shape is Circle c)
-    {
-        Console.WriteLine($"Circle with radius {c.Radius} has an area of {c.Area():F2}.");
-    }
-    else
-    {
-        Console.WriteLine("The shape is not a circle.");
-    }
-  }
+        // Constructor initializes the length and width.
+        public Rectangle(double length, double width)
+        {
+            Length = length;
+            Width = width;
+        }
 
-  public static void PrintShapeArea(Shape shape)
-  {
-    switch (shape)
+        // Overridden Area method computes area of the rectangle.
+        public override double Area() => Length * Width;
+    }
+
+    // Derived class for triangles, inherits from Shape.
+    public class Triangle : Shape
     {
-        case Circle c:
+        // Properties to hold the base and height of the triangle.
+        public double Base { get; }
+        public double Height { get; }
+
+        // Constructor initializes the base and height.
+        public Triangle(double @base, double height)
+        {
+            Base = @base;
+            Height = height;
+        }
+
+        // Overridden Area method computes area of the triangle.
+        public override double Area() => 0.5 * Base * Height;
+    }
+
+    // Method to print the area of a shape if it's a circle.
+    public static void PrintCircleArea(Shape shape)
+    {
+        // Type pattern matching: checks if 'shape' is a Circle.
+        if (shape is Circle c)
+        {
+            // Prints area of the circle using the 'c' variable which is cast from 'shape'.
             Console.WriteLine($"Circle with radius {c.Radius} has an area of {c.Area():F2}.");
-            break;
-        case Rectangle r when r.Length == r.Width:
-            Console.WriteLine($"Square with side {r.Length} has an area of {r.Area():F2}.");
-            break;
-        case Rectangle r:
-            Console.WriteLine($"Rectangle with length {r.Length} and width {r.Width} has an area of {r.Area():F2}.");
-            break;
-        case Triangle t:
-            Console.WriteLine($"Triangle with base {t.Base} and height {t.Height} has an area of {t.Area():F2}.");
-            break;
-        default:
-            Console.WriteLine("Unknown shape.");
-            break;
+        }
+        else
+        {
+            // Executed if 'shape' is not a Circle.
+            Console.WriteLine("The shape is not a circle.");
+        }
     }
-  }
+
+    // Method to print the area of a shape, handling various shape types.
+    public static void PrintShapeArea(Shape shape)
+    {
+        // Switch statement with pattern matching on 'shape'.
+        switch (shape)
+        {
+            // type pattern matching: checks if the shape object is of type Circle and casts it to Circle, storing it in variable c
+            case Circle c:
+                Console.WriteLine($"Circle with radius {c.Radius} has an area of {c.Area():F2}.");
+                break;
+            // conditional pattern (guard clause):  this is a type pattern for Rectangle with an additional condition that checks if the Length and Width properties are equal, indicating it's a square.
+            case Rectangle r when r.Length == r.Width:
+                Console.WriteLine($"Square with side {r.Length} has an area of {r.Area():F2}.");
+                break;
+            // type pattern matching: checks if the shape object is of type Rectangle and casts it to Rectangle, storing it in variable r
+            case Rectangle r:
+                Console.WriteLine($"Rectangle with length {r.Length} and width {r.Width} has an area of {r.Area():F2}.");
+                break;
+            // type pattern matching: checks if the shape object is of type Triangle and casts it to Triangle, storing it in variable t
+            case Triangle t:
+                Console.WriteLine($"Triangle with base {t.Base} and height {t.Height} has an area of {t.Area():F2}.");
+                break;
+            // var pattern matching: matches any object and assigns it to a variable s
+            case Shape s when s.Area() == 0:
+                Console.WriteLine("The shape has no area.");
+                break;
+            // constant pattern matching: checks if the shape object is not null
+            case null:
+                Console.WriteLine("No shape provided.");
+                break;
+            // default case if none of the above patterns match
+            default:
+                Console.WriteLine("Unknown shape.");
+                break;
+        }
+    }
   ```
 
 ### Local Functions
 
-- Local functions in C# 7.0 are a way to define methods inside other methods. These functions are useful when a piece of code is only relevant within the scope of a single method and nowhere else in your class. They help keep your code organized and more readable by hiding helper methods that are only used by a single method.
+Local functions in C# 7.0 are a way to define methods inside other methods. These functions are useful when a piece of code is only relevant within the scope of a single method and nowhere else in your class. They help keep your code organized and more readable by hiding helper methods that are only used by a single method.
+
 - **Encapsulation**: They encapsulate a piece of functionality without exposing it outside the containing method.
 - **Readability**: They can make the intent of your code clearer, as the helper function is placed close to where it's used.
 - **Variables Scope**: They can access variables from the enclosing method, making it easier to work with those variables without passing them as parameters.
@@ -287,7 +307,8 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 ### Ref Returns and Locals
 
-- Ref Returns and Locals is a feature introduced in C# 7.0 that allows methods to return references to variables, rather than the values themselves. This feature is particularly useful for working with large data structures, where passing around copies of data can be expensive in terms of performance. By returning a reference, you can directly access and modify the original data, which can lead to more efficient code.
+Ref Returns and Locals is a feature introduced in C# 7.0 that allows methods to return references to variables, rather than the values themselves. This feature is particularly useful for working with large data structures, where passing around copies of data can be expensive in terms of performance. By returning a reference, you can directly access and modify the original data, which can lead to more efficient code.
+
 - **Ref Returns**: A method can return a reference to a variable rather than the value. This means that any changes made to this reference are reflected in the original data structure.
 - **Ref Locals**: You can store the returned reference in a local variable. This local variable now refers directly to the original data, allowing for efficient modifications.
 
@@ -349,7 +370,8 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 ### Out Variables
 
-- The "Out Variables" feature introduced in C# 7.0 simplifies how variables are declared when they are to be used with methods that have output parameters. Before C# 7.0, if you wanted to use an output parameter in a method, you had to declare the variable in a separate statement before you could pass it to the method. This often led to more verbose code, especially when the variable was only needed for the output of the method call.
+The "Out Variables" feature introduced in C# 7.0 simplifies how variables are declared when they are to be used with methods that have output parameters. Before C# 7.0, if you wanted to use an output parameter in a method, you had to declare the variable in a separate statement before you could pass it to the method. This often led to more verbose code, especially when the variable was only needed for the output of the method call.
+
 - **Old Way**
 
   ```csharp
@@ -372,38 +394,37 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 ### Literal Improvements
 
-#### Binary Literals
+- **Binary Literals**: C# 7.0 introduced binary literals, allowing you to define binary numbers directly in your code. This can be useful when working with bit flags or other binary data. Binary literals are prefixed with `0b` to distinguish them from decimal or hexadecimal numbers.
 
-- **Old Way**
+  - **Old Way**
 
-  ```csharp
-  int permission = 0x4; // 4 in hexadecimal is 100 in binary.
-  ```
+    ```csharp
+    int permission = 0x4; // 4 in hexadecimal is 100 in binary.
+    ```
 
-- **New Way**:
-  You can now define binary literals using the `0b` prefix, making it easier to work with binary numbers.
+  - **New Way**: You can now define binary literals using the `0b` prefix, making it easier to work with binary numbers.
 
-  ```csharp
-  int permission = 0b0100; // Represents 4 in binary directly.
-  ```
+    ```csharp
+    int permission = 0b0100; // Represents 4 in binary directly.
+    ```
 
-#### Digit Separators
+- **Digit Separators**: C# 7.0 introduced digit separators, which allow you to use underscores `_` to separate groups of digits in numeric literals. This can make large numbers more readable by breaking them into smaller, more manageable chunks.
 
-- **Old Way**
+  - **Old Way**
 
-  ```csharp
-  int billion = 1000000000;
-  long creditCardNumber = 1234567890123456;
-  ```
+    ```csharp
+    int 1billion = 1000000000;
+    long creditCardNumber = 1234567890123456;
+    ```
 
-- **New Way**: You can now use underscores `_` as digit separators to make large numbers more readable.
+  - **New Way**: You can now use underscores `_` as digit separators to make large numbers more readable.
 
-  ```csharp
-  int billion = 1_000_000_000;
-  long creditCardNumber = 1234_5678_9012_3456;
-  ```
+    ```csharp
+    int billion = 1_000_000_000;
+    long creditCardNumber = 1234_5678_9012_3456;
+    ```
 
-- And with binary literals, you can combine digit separators and binary literals for even more readable code. In this example, `permissions` might represent a set of boolean flags where each bit is a different permission setting. Using the digit separator makes it easier to see the individual groups of bits.
+- And with **binary literals**, you can combine **digit separators** and binary literals for even more readable code. In this example, `permissions` might represent a set of boolean flags where each bit is a different permission setting. Using the digit separator makes it easier to see the individual groups of bits.
 
   ```csharp
   int permissions = 0b0010_1010; // Binary representation of 42 with digit separators.
@@ -411,7 +432,8 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 ### Generalized Async Return Types
 
-- C# 7.0 introduced a feature called Generalized Async Return Types, which allows you to return any type from an async method. Before C# 7.0, async methods could only return `Task`, `Task<T>`, or `void`. With this new feature, you can return any type that has a suitable `GetAwaiter` method. This can be useful when you want to return a custom type or a value directly from an async method without wrapping it in a `Task`.
+C# 7.0 introduced a feature called Generalized Async Return Types, which allows you to return any type from an async method. Before C# 7.0, async methods could only return `Task`, `Task<T>`, or `void`. With this new feature, you can return any type that has a suitable `GetAwaiter` method. This can be useful when you want to return a custom type or a value directly from an async method without wrapping it in a `Task`.
+
 - **Old Way**
 
   ```csharp
@@ -469,7 +491,7 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
     }
   ```
 
-- Constructors and Finalizers
+- **Constructors and Finalizers**
 
   ```csharp
     class FileLogger
@@ -482,7 +504,7 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
     }
   ```
 
-- Read and Write Properties
+- **Read and Write Properties**
 
   ```csharp
     class Temperature
@@ -504,7 +526,7 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
     }
   ```
 
-- Indexers
+- **Indexers**
 
   ```csharp
     class DataStore
@@ -545,4 +567,4 @@ C# 7.0 brought many improvements that make coding easier and more efficient. Fea
 
 C# 7.0 introduces powerful features that enhance code readability, efficiency, and maintainability. With additions like Tuples for multi-value returns, Pattern Matching for data inspection, and Local Functions for scoped method definitions, developers can write more expressive and concise code. Improvements like Ref Returns and Locals, Out Variables, and Literal Enhancements further streamline coding practices. Generalized Async Return Types expand asynchronous programming capabilities, while expanded Expression Bodied Members and Throw Expressions simplify syntax for a variety of use cases. These features collectively make C# more versatile and enjoyable for developers, paving the way for writing robust and high-performing applications.
 
-[Previous: C# 6.0 New Features Guide](./csharp-6.0.md) | [Back to main page](../README.md) | [Next: C# 8.0 New Features Guide](./csharp-8.0.md)
+[Previous: C# 6.0 New Features Overview](./csharp-6.0.md) | [Back to main page](../../README.md) | [Next: C# 7.1 New Features Overview](./csharp-7.1.md)

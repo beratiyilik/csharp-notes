@@ -1,17 +1,15 @@
-# C# 10.0 New Features
+# C# 10.0 New Features Overview
 
 ## Table of Contents
 
-- [C# 10.0 New Features](#c-100-new-features)
+- [C# 10.0 New Features Overview](#c-100-new-features)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
     - [Record structs](#record-structs)
     - [Improvements of structure types](#improvements-of-structure-types)
     - [Interpolated string handlers](#interpolated-string-handlers)
     - [Global using directives](#global-using-directives)
-      - [Simplifying Project-Wide Namespaces with Global Using Directives](#simplifying-project-wide-namespaces-with-global-using-directives)
-      - [Combining Global and Local Using Directives](#combining-global-and-local-using-directives)
     - [File-scoped namespace declaration](#file-scoped-namespace-declaration)
     - [Extended property patterns](#extended-property-patterns)
     - [Improvements on lambda expressions](#improvements-on-lambda-expressions)
@@ -25,7 +23,7 @@
     - [Warning wave 6](#warning-wave-6)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
 In C# 10.0, a variety of new features and enhancements have been introduced to further improve the language's capabilities, making it more efficient, expressive, and easier to use for developers. Below is a concise overview of some of the key new features and improvements in C# 10.0:
 
@@ -255,59 +253,59 @@ In C# 10.0, the "Global using directives" feature was introduced to streamline h
 
 For instance, if you find yourself repeatedly importing the same namespaces across various files, such as `System`, `System.Collections.Generic`, or `System.Linq`, you can now declare these imports once using the `global` keyword, and they will automatically apply to every file within the scope of your project. This change leads to cleaner code and less repetition, simplifying project maintenance and readability.
 
-#### Simplifying Project-Wide Namespaces with Global Using Directives
+- **Simplifying Project-Wide Namespaces with Global Using Directives**
 
-Global using directives allow for project-wide inclusion of common namespaces, making them available in all source files without individual declaration.
+  Global using directives allow for project-wide inclusion of common namespaces, making them available in all source files without individual declaration.
 
-- **Declaring Global Usings in a Separate File**
+  - **Declaring Global Usings in a Separate File**
 
-```csharp
-// globalusings.cs
-// This file contains global using directives that are applied across all source files in the project.
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-```
+  ```csharp
+  // globalusings.cs
+  // This file contains global using directives that are applied across all source files in the project.
+  global using System;
+  global using System.Collections.Generic;
+  global using System.Linq;
+  ```
 
-_Comment:_ By placing global using directives in this file, namespaces like `System`, `System.Collections.Generic`, and `System.Linq` are automatically made available across all source files, eliminating the need for redundant declarations.
+  _Comment:_ By placing global using directives in this file, namespaces like `System`, `System.Collections.Generic`, and `System.Linq` are automatically made available across all source files, eliminating the need for redundant declarations.
 
-- **Utilizing Global Usings in Your Code**
+  - **Utilizing Global Usings in Your Code**
 
-```csharp
-// Program.cs
-// With global using directives declared, you can directly use types from those namespaces without explicitly declaring them in this file.
+  ```csharp
+  // Program.cs
+  // With global using directives declared, you can directly use types from those namespaces without explicitly declaring them in this file.
 
-var numbers = new List<int> { 1, 2, 3 };
-var filteredNumbers = numbers.Where(n => n > 1).ToList();
+  var numbers = new List<int> { 1, 2, 3 };
+  var filteredNumbers = numbers.Where(n => n > 1).ToList();
 
-foreach (var number in filteredNumbers)
-{
-    Console.WriteLine(number);
-}
-```
+  foreach (var number in filteredNumbers)
+  {
+      Console.WriteLine(number);
+  }
+  ```
 
-_Comment:_ This example demonstrates the convenience of global using directives, allowing the direct use of `List<int>` and LINQ methods without specifying their namespaces explicitly.
+  _Comment:_ This example demonstrates the convenience of global using directives, allowing the direct use of `List<int>` and LINQ methods without specifying their namespaces explicitly.
 
-#### Combining Global and Local Using Directives
+- **Combining Global and Local Using Directives**
 
-Global using directives complement rather than replace local using directives, enabling an efficient combination of both where necessary.
+  Global using directives complement rather than replace local using directives, enabling an efficient combination of both where necessary.
 
-- **Combining Global and Local Usings**
+  - **Combining Global and Local Usings**
 
-```csharp
-// SpecificFile.cs
-// For file-specific namespaces, local using directives can still be used alongside global ones.
-using System.IO;
+  ```csharp
+  // SpecificFile.cs
+  // For file-specific namespaces, local using directives can still be used alongside global ones.
+  using System.IO;
 
-var filePath = "example.txt";
-if (File.Exists(filePath))
-{
-    var content = File.ReadAllText(filePath);
-    Console.WriteLine(content);
-}
-```
+  var filePath = "example.txt";
+  if (File.Exists(filePath))
+  {
+      var content = File.ReadAllText(filePath);
+      Console.WriteLine(content);
+  }
+  ```
 
-_Comment:_ In scenarios requiring specific namespaces less common across the project, local using directives (e.g., `System.IO` for file operations) can be utilized alongside global ones for flexibility and clarity.
+  _Comment:_ In scenarios requiring specific namespaces less common across the project, local using directives (e.g., `System.IO` for file operations) can be utilized alongside global ones for flexibility and clarity.
 
 ### File-scoped namespace declaration
 
@@ -960,3 +958,5 @@ The introduction of C# 10.0 brings several significant enhancements to the langu
 The addition of these features demonstrates a continued commitment to language improvement, responding to community feedback and evolving programming practices. As developers explore and adopt these new capabilities, they will likely find their C# projects becoming more concise and their coding workflows more streamlined.
 
 In conclusion, C# 10.0's new features reflect both an adherence to the language's core principles of simplicity, expressiveness, and performance, and a forward-looking approach to modern software development challenges. As the .NET ecosystem continues to grow and diversify, these improvements ensure that C# remains a top choice for developers working across a wide range of applications and industries.
+
+[Previous: C# 9.0 New Features Overview](./csharp-9.0.md) | [Back to main page](../../README.md) | [Next: C# 11.0 New Features Overview](./csharp-11.0.md)

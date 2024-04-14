@@ -1,10 +1,10 @@
-# C# 11.0 New Features
+# C# 11.0 New Features Overview
 
 ## Table of Contents
 
-- [C# 11.0 New Features](#c-110-new-features)
+- [C# 11.0 New Features Overview](#c-110-new-features)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
     - [Generic attributes](#generic-attributes)
     - [Generic math support](#generic-math-support)
@@ -23,7 +23,7 @@
     - [Warning wave 7](#warning-wave-7)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
 In C# 11.0, the language continues its trajectory of becoming more powerful, flexible, and efficient for developers. This version introduces a number of new features aimed at enhancing the programming experience, ensuring type safety, and improving the performance of C# applications. Among these features, generic attributes stand out for providing a more convenient syntax for attributes that require a `System.Type` parameter, simplifying the declaration and use of attributes in your code. Generic math support opens up new possibilities for performing mathematical operations on generic types, enhancing the language's capabilities for scientific and numerical computing.
 
@@ -1204,3 +1204,5 @@ public class Program
 ## Conclusion
 
 C# 11.0 marks a significant advancement in the language's development, introducing a suite of features that enhance its flexibility, safety, and efficiency. With additions like generic attributes, generic math support, and improvements to string handling through raw string literals and UTF-8 string literals, developers are equipped with more tools for writing clear, concise, and type-safe code. The introduction of list patterns, required members, and file-local types further enhances C#'s capabilities for both high-level and low-level programming, ensuring that C# remains a powerful choice for a wide range of software development projects. These features collectively contribute to making C# 11.0 a more expressive, performant, and versatile language, continuing its evolution to meet the needs of modern software development.
+
+[Previous: C# 10.0 New Features Overview](./csharp-10.0.md) | [Back to main page](../../README.md) | [Next: C# 12.0 New Features Overview](./csharp-12.0.md)

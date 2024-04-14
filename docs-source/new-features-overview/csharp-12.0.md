@@ -1,10 +1,10 @@
-# C# 12.0 New Features
+# C# 12.0 New Features Overview
 
 ## Table of Contents
 
-- [C# 12.0 New Features](#c-120-new-features)
+- [C# 12.0 New Features Overview](#c-120-new-features)
   - [Table of Contents](#table-of-contents)
-  - [Introduction and Overview](#introduction-and-overview)
+  - [Introduction](#introduction)
   - [New Features](#new-features)
     - [Primary Constructors](#primary-constructors)
     - [Inline Arrays](#inline-arrays)
@@ -16,7 +16,7 @@
     - [Collection Expressions](#collection-expressions)
   - [Conclusion](#conclusion)
 
-## Introduction and Overview
+## Introduction
 
 C# 12.0 introduces a series of enhancements aimed at improving code clarity, reducing boilerplate, and enhancing performance, making it a significant update for developers working with the .NET framework. This version includes notable features such as Primary Constructors, which simplify the declaration of constructors in classes and structs, Inline Arrays that optimize performance by allowing fixed-size arrays within structs, and Default Lambda Parameters which enhance the flexibility of lambda expressions. Additional features like `ref readonly` parameters, the use of `using` to alias any type, and the introduction of Collection Expressions streamline various aspects of coding in C#. Experimental Attributes and Interceptors are also introduced to help developers experiment with new ideas safely and efficiently. These improvements collectively enhance the language’s expressiveness and safety, aiming to make C# a more robust choice for both high-level and low-level programming tasks.
 
@@ -559,3 +559,5 @@ object[] mixedTypes = ["string", 10, true];
 C# 12.0 marks a significant evolution in the language, focusing on simplifying syntax, enhancing performance, and improving code maintainability. With the introduction of Primary Constructors, Inline Arrays, and Default Lambda Parameters, developers can write more concise and expressive code. Features like ref readonly parameters and the ability to alias any type with using further extend the language's versatility and safety. The addition of Collection Expressions and spread operators simplifies the handling of data collections, making the codebase cleaner and easier to manage.
 
 Moreover, experimental features such as the Experimental Attribute and Interceptors provide a sandbox for innovation, allowing developers to experiment with new concepts before fully integrating them into production code. These advancements not only enhance developer productivity but also encourage safer and more efficient coding practices. As C# continues to evolve, these features are expected to be refined and expanded, offering even greater possibilities for future development projects.
+
+[Previous: C# 11.0 New Features Overview](./csharp-11.0.md) | [Back to main page](../../README.md) | [Next: Exploring the Core Components of LINQ in C#: A Developer’s Guide](./../linq-core-components-guide.md)
